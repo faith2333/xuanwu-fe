@@ -111,14 +111,15 @@ const Login: React.FC = () => {
   const handleSubmit = async (values: USER.LoginReq) => {
     try {
       // 登录
-      const msg = await login({ ...values, type });
-      if (msg.success) {
+      const data = await login({ ...values, type });
+      console.log(data);
+      if (data.jwtToken) {
         const defaultLoginSuccessMessage = intl.formatMessage({
           id: 'pages.login.success',
           defaultMessage: '登录成功！',
         });
-        if (msg.data) {
-          localStorage.setItem('token', msg.data?.jwtToken || '')
+        if (data.jwtToken) {
+          localStorage.setItem('token', data.jwtToken || '')
         }
 
         message.success(defaultLoginSuccessMessage);
@@ -128,7 +129,7 @@ const Login: React.FC = () => {
         return;
       }
     
-      setUserLoginState(msg);
+      setUserLoginState(data);
     } catch (error) {
       const defaultLoginFailureMessage = intl.formatMessage({
         id: 'pages.login.failure',
@@ -195,11 +196,11 @@ const Login: React.FC = () => {
             ]}
           />
 
-          {userLoginState && !userLoginState.success && (
+          {userLoginState && !userLoginState.jwtToken && (
             <LoginMessage
               content={intl.formatMessage({
                 id: 'pages.login.accountLogin.errorMessage',
-                defaultMessage: '账户或密码错误(admin/ant.design)',
+                defaultMessage: '账户或密码错误',
               })}
             />
           )}

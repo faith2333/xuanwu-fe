@@ -38,11 +38,6 @@ export default [
         path: '/account/center',
         component: './User/Account/Center',
       },
-      {
-        name: 'settings',
-        path: '/account/settings',
-        component: './User/Account/Settings',
-      },
     ],
   },
   {

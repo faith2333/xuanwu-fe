@@ -22,11 +22,6 @@ declare namespace USER {
     }
 
     type LoginResp = {
-        code? : number;
-        data? : {
-            jwtToken? : string;
-        }
-        message? : string;
-        success? : boolean;
+        jwtToken?: string;
     }
 }

@@ -24,10 +24,11 @@ export async function getInitialState(): Promise<{
 }> {
   const fetchUserInfo = async () => {
     try {
-      const msg = await queryCurrentUser({
+      const curUser = await queryCurrentUser({
         skipErrorHandler: true,
       });
-      return msg.data;
+      localStorage.setItem('currentUsername', curUser.username);
+      return curUser;
     } catch (error) {
       history.push(loginPath);
     }
