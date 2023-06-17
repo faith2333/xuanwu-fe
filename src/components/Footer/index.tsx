@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
         {
           key: 'XuanWu',
           title: 'XuanWu',
-          href: 'https://github.com/xuanwu',
+          href: 'https://github.com/faith2333/xuanwu',
           blankTarget: true,
         },
         {

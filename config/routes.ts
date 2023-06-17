@@ -29,6 +29,23 @@ export default [
     component: './Welcome',
   },
   {
+    path: '/account',
+    name: 'account',
+    menu: false,
+    routes: [
+      {
+        name: 'center',
+        path: '/account/center',
+        component: './User/Account/Center',
+      },
+      {
+        name: 'settings',
+        path: '/account/settings',
+        component: './User/Account/Settings',
+      },
+    ],
+  },
+  {
     path: '/',
     redirect: '/welcome',
   },
