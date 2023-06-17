@@ -57,7 +57,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
       src: initialState?.currentUser?.avatar || 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
       title: <AvatarName />,
       render: (_, avatarChildren) => {
-        return <AvatarDropdown>{avatarChildren}</AvatarDropdown>;
+        return <AvatarDropdown menu>{avatarChildren}</AvatarDropdown>;
       },
     },
     waterMarkProps: {
