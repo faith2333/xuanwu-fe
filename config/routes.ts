@@ -41,6 +41,19 @@ export default [
     ],
   },
   {
+    path: '/application',
+    name: 'Application',
+    icon: 'AppstoreOutlined',
+    routes: [
+      {
+        name: 'Application List',
+        path: '/application/list',
+        icon: 'UnorderedListOutlined',
+        component: './Application/AppList',
+      },
+    ],
+  },
+  {
     path: '/',
     redirect: '/welcome',
   },

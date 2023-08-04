@@ -1,89 +1,7 @@
 import { PageContainer } from '@ant-design/pro-components';
-import { FormattedMessage, useIntl, useModel } from '@umijs/max';
+import { FormattedMessage, useModel } from '@umijs/max';
 import { Card, theme } from 'antd';
 import React from 'react';
-
-/**
- * 每个单独的卡片，为了复用样式抽成了组件
- * @param param0
- * @returns
- */
-const InfoCard: React.FC<{
-  title: string;
-  index: number;
-  desc: string;
-  href: string;
-}> = ({ title, href, index, desc }) => {
-  const { useToken } = theme;
-
-  const intl = useIntl();
-
-  const { token } = useToken();
-
-  return (
-    <div
-      style={{
-        backgroundColor: token.colorBgContainer,
-        boxShadow: token.boxShadow,
-        borderRadius: '8px',
-        fontSize: '14px',
-        color: token.colorTextSecondary,
-        lineHeight: '22px',
-        padding: '16px 19px',
-        minWidth: '220px',
-        flex: 1,
-      }}
-    >
-      <div
-        style={{
-          display: 'flex',
-          gap: '4px',
-          alignItems: 'center',
-        }}
-      >
-        <div
-          style={{
-            width: 48,
-            height: 48,
-            lineHeight: '22px',
-            backgroundSize: '100%',
-            textAlign: 'center',
-            padding: '8px 16px 16px 12px',
-            color: '#FFF',
-            fontWeight: 'bold',
-            backgroundImage:
-              "url('https://gw.alipayobjects.com/zos/bmw-prod/daaf8d50-8e6d-4251-905d-676a24ddfa12.svg')",
-          }}
-        >
-          {index}
-        </div>
-        <div
-          style={{
-            fontSize: '16px',
-            color: token.colorText,
-            paddingBottom: 8,
-          }}
-        >
-          {title}
-        </div>
-      </div>
-      <div
-        style={{
-          fontSize: '14px',
-          color: token.colorTextSecondary,
-          textAlign: 'justify',
-          lineHeight: '22px',
-          marginBottom: 8,
-        }}
-      >
-        {desc}
-      </div>
-      <a href={href} target="_blank" rel="noreferrer">
-        了解更多 {'>'}
-      </a>
-    </div>
-  );
-};
 
 const Welcome: React.FC = () => {
   const { token } = theme.useToken();
@@ -130,24 +48,6 @@ const Welcome: React.FC = () => {
           >
             <FormattedMessage id='pages.welcome.description' />
           </p>
-          <InfoCard 
-            title='应用管理'
-            index={1}
-            desc='应用管理---等待完善'
-            href='https://github.com/faith2333/xuanwu/docs/application.md'
-          ></InfoCard>
-          <InfoCard
-            title='测试管理'
-            index={2}
-            desc='测试管理---等待完善'
-            href='https://github.com/faith2333/xuanwu/docs/test.md'
-          ></InfoCard>
-          <InfoCard
-            title='运维管理'
-            index={3}
-            desc='运维管理---等待完善'
-            href='https://github.com/faith2333/xuanwu/docs/ops.md'
-          ></InfoCard>
           <div
             style={{
               display: 'flex',
