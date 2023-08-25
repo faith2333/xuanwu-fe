@@ -1,4 +1,3 @@
-import { method } from 'lodash';
 import { request } from 'umi';
 
 /** 登录接口 POST /v1/user/login */
