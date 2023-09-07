@@ -1,6 +1,5 @@
-﻿import type { RequestOptions } from '@@/plugin-request/request';
-import type { RequestConfig } from '@umijs/max';
-import { message, notification } from 'antd';
+﻿import type { RequestConfig } from '@umijs/max';
+import { message } from 'antd';
 
 /**
  * @name 错误处理
@@ -50,7 +49,6 @@ export const errorConfig: RequestConfig = {
   // 请求拦截器
   requestInterceptors: [
     (config: RequestConfig) => {
-      console.log('requestInterceptors', config);
       if(localStorage.getItem('token')) {
         const token = localStorage.getItem('token');
         config.headers = {
@@ -69,7 +67,7 @@ export const errorConfig: RequestConfig = {
       // 拦截响应数据，进行个性化处理
       const { code,success,data, message: mess } = response as unknown as BASE.Response;
 
-      if (success === false) {
+      if (success) {
         message.error(mess);
         return
       }
