@@ -1,10 +1,9 @@
 import { deleteApp, listApps } from "@/services/application/app/api";
-import { AndroidFilled, AndroidOutlined, AppleFilled, CodeFilled, Html5Filled } from "@ant-design/icons";
+import { AndroidOutlined, AppleFilled, CodeFilled, Html5Filled, PlusOutlined } from "@ant-design/icons";
 import { PageContainer, ProColumns, ProTable } from "@ant-design/pro-components";
-import { render } from "@testing-library/react";
 import { Button, Space, Tag, message } from "antd";
-import { set } from "lodash";
 import React from "react";
+import AddAppForm from "./components/add_application_form";
 
 
 export type ApplicationListProps = {
@@ -13,6 +12,7 @@ export type ApplicationListProps = {
 
 const ApplicationList: React.FC<ApplicationListProps> = (props) => {
     const [loading, setLoading] = React.useState<boolean>(false)
+    const [addVisiable, setAddVisiable] = React.useState<boolean>(false)
 
     const columns : ProColumns<APP.AppItem>[] = [
         {
@@ -50,6 +50,14 @@ const ApplicationList: React.FC<ApplicationListProps> = (props) => {
                 } else {
                     return <Tag icon={<CodeFilled />} >Backend</Tag>
                 }
+            }
+        },
+        {
+            title: 'Category',
+            render: (_, record) => {
+                return (
+                    <Tag color='blue'>{record.category}</Tag>
+                )
             }
         },
         {
@@ -108,6 +116,10 @@ const ApplicationList: React.FC<ApplicationListProps> = (props) => {
 
     return (
         <>
+            <AddAppForm
+                visible={addVisiable}
+                setVisible={setAddVisiable}
+            />
             <PageContainer 
                 title={false}
             >
@@ -115,6 +127,13 @@ const ApplicationList: React.FC<ApplicationListProps> = (props) => {
                     loading={loading}
                     columns={columns}
                     request={listApps}
+                    toolBarRender={() => [
+                        <Button key="3" type="primary" onClick={()=>{
+                            setAddVisiable(true)
+                        }}>
+                            <PlusOutlined/>ADD
+                        </Button>,
+                    ]}
                 />
             </PageContainer>
         </>
