@@ -1,10 +1,15 @@
+import { PageContainer } from "@ant-design/pro-components";
 
 export type RoleListProps = {}
 
 const RoleList: React.FC<RoleListProps> = (props) => {
     return (
         <div>
-            Role List
+            <PageContainer
+                title={false}
+            >
+               Role List
+            </PageContainer>
         </div>
     )
 }
