@@ -74,16 +74,19 @@ const ApplicationList: React.FC<ApplicationListProps> = (props) => {
             title: 'Create User',
             dataIndex: 'createUser',
             key: 'createUser',
+            search: false,
         },
         {
             title: 'Create Time',
             dataIndex: 'gmtCreate',
             key: 'gmtCreate',
+            search: false,
         },
         {
             title: 'Description',
             dataIndex: 'desc',
             key: 'description',
+            search: false,
         },
         {
             title: 'Operation',
@@ -93,9 +96,6 @@ const ApplicationList: React.FC<ApplicationListProps> = (props) => {
                         <a onClick={()=>{
                             message.error('Not implemented yet!')
                         }}>DETAIL</a>
-                        <a onClick={()=>{
-                            message.error('Not implemented yet!')
-                        }}>EDIT</a>
                         <a style={{color: 'red'}} onClick={()=>{
                             onDeleteApp(record.code)
                         }}>DELETE</a>
