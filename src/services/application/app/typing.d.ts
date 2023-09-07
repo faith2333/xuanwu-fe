@@ -23,5 +23,9 @@ declare namespace APP {
                 notifyUsers ?: string[];
             }
         ]
+        gmtCreate ?: string;
+        gmtModify ?: string;
+        createUser ?: string;
+        modifyUser ?: string;
     }
 }

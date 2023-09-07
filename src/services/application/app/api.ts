@@ -23,3 +23,14 @@ export async function listApps(
         },
     });
 }
+
+
+export async function deleteApp(
+    params: {
+        code: string;
+    },
+) {
+    return request(`/v1/application/delete/${params.code}`, {
+        method: 'DELETE',
+    });
+}
