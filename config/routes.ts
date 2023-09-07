@@ -54,6 +54,25 @@ export default [
     ],
   },
   {
+    path: '/system',
+    name: 'System',
+    icon: 'SettingOutlined',
+    routes: [
+      {
+        name: 'User',
+        path: '/system/user',
+        icon: 'UserOutlined',
+        component: './System/User',
+      },
+      {
+        name: 'Organization',
+        path: '/system/org',
+        icon: 'TeamOutlined',
+        component: './System/Organization',
+      }
+    ],
+  },
+  {
     path: '/',
     redirect: '/welcome',
   },
