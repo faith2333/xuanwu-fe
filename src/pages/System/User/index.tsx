@@ -1,10 +1,13 @@
+import { PageContainer } from "@ant-design/pro-components";
 
 export type UserListProps = {}
 
 const UserList: React.FC<UserListProps> = (props) => {
     return (
         <div>
-            user list
+            <PageContainer>
+               User List
+            </PageContainer>
         </div>
     )
 }

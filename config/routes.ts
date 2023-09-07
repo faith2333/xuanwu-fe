@@ -65,11 +65,17 @@ export default [
         component: './System/User',
       },
       {
+        name: 'Role',
+        path: '/system/role',
+        icon: 'UsergroupAddOutlined',
+        component: './System/Role',
+      },
+      {
         name: 'Organization',
         path: '/system/org',
         icon: 'TeamOutlined',
         component: './System/Organization',
-      }
+      },
     ],
   },
   {
