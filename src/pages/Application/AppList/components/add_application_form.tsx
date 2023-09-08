@@ -52,7 +52,7 @@ const AddAppForm: React.FC<AddAppFormProps> = (props) => {
                                 label="Name"
                                 rules={[{ required: true, message: 'Please enter application name' }]}
                             >
-                                <Input placeholder= "Please enter rule name"/>
+                                <Input placeholder= "Please enter application name"/>
                             </Form.Item>
                         </Col>
                         <Col span={12}>
@@ -62,7 +62,7 @@ const AddAppForm: React.FC<AddAppFormProps> = (props) => {
                                 tooltip='Global unique code for application'
                                 rules={[{ required: true, message: 'Please enter application code' }]}
                             >
-                                <Input placeholder="Please enter rule code" />
+                                <Input placeholder="Please enter application code" />
                             </Form.Item>
                         </Col>
                         <Col span={6}>

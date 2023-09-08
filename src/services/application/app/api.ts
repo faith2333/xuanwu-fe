@@ -16,7 +16,7 @@ export async function listApps(
 
     },
 ) {
-    return request('/v1/application/list', {
+    return request('/v1/application/app', {
         method: 'GET',
         params: {
             ...params,
@@ -30,7 +30,7 @@ export async function deleteApp(
         code: string;
     },
 ) {
-    return request(`/v1/application/delete/${params.code}`, {
+    return request(`/v1/application/app/delete/${params.code}`, {
         method: 'DELETE',
     });
 }
