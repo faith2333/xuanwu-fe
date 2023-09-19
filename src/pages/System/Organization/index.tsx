@@ -95,10 +95,7 @@ const Organization: React.FC<OrganizationProps> = (props) => {
                 item={curORG}
                 edit={edit}
             />
-            <PageContainer
-                title={false}
-            >
-               <ProTable
+            <ProTable
                     loading={loading}
                     columns={columns}
                     request={listORGs}
@@ -109,10 +106,7 @@ const Organization: React.FC<OrganizationProps> = (props) => {
                             setCuroRG({} as ORG.OrganizationItem)
                         }} type="primary"><PlusOutlined/>Add</Button>,
                     ]}
-               >
-
-               </ProTable>
-            </PageContainer>
+               />
         </div>
     )
 }

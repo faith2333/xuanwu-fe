@@ -5,11 +5,7 @@ export type RoleListProps = {}
 const RoleList: React.FC<RoleListProps> = (props) => {
     return (
         <div>
-            <PageContainer
-                title={false}
-            >
-               Role List
-            </PageContainer>
+            Role List
         </div>
     )
 }

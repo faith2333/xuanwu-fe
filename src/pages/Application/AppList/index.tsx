@@ -120,22 +120,18 @@ const ApplicationList: React.FC<ApplicationListProps> = (props) => {
                 visible={addVisiable}
                 setVisible={setAddVisiable}
             />
-            <PageContainer 
-                title={false}
-            >
-                <ProTable
-                    loading={loading}
-                    columns={columns}
-                    request={listApps}
-                    toolBarRender={() => [
-                        <Button key="3" type="primary" onClick={()=>{
-                            setAddVisiable(true)
-                        }}>
-                            <PlusOutlined/>ADD
-                        </Button>,
-                    ]}
-                />
-            </PageContainer>
+            <ProTable
+                loading={loading}
+                columns={columns}
+                request={listApps}
+                toolBarRender={() => [
+                    <Button key="3" type="primary" onClick={()=>{
+                        setAddVisiable(true)
+                    }}>
+                        <PlusOutlined/>ADD
+                    </Button>,
+                ]}
+            />
         </>
     )
 }
