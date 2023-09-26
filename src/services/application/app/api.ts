@@ -24,6 +24,31 @@ export async function listApps(
     });
 }
 
+export async function listAppsAndFormatResponse(
+    params: {
+        id?: number;
+        code?: string;
+        name?: string;
+        appType?: string;
+        category?: string;
+        labels?: string[];
+        /** current page */
+        current?: number;
+        /** page size */
+        pageSize?: number;
+
+    },
+) {
+    return request('/v1/application/app', {
+        method: 'GET',
+        params: {
+            ...params,
+        },
+    }).then((res)=>{
+        return res.data
+    });
+}
+
 
 export async function deleteApp(
     params: {

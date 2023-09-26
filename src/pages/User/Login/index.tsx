@@ -110,15 +110,18 @@ const Login: React.FC = () => {
   const handleSubmit = async (values: USER.LoginReq) => {
     try {
       // 登录
-      const data = await login({ ...values, type });
-      console.log(data);
-      if (data.jwtToken) {
+      const resp = await login({ ...values, type });
+      if (!resp.success) {
+        throw new Error()
+      }
+
+      if (resp.data.jwtToken) {
         const defaultLoginSuccessMessage = intl.formatMessage({
           id: 'pages.login.success',
           defaultMessage: '登录成功！',
         });
-        if (data.jwtToken) {
-          localStorage.setItem('token', data.jwtToken || '')
+        if (resp.data.jwtToken) {
+          localStorage.setItem('token', resp.data.jwtToken || '')
         }
 
         message.success(defaultLoginSuccessMessage);
@@ -128,13 +131,12 @@ const Login: React.FC = () => {
         return;
       }
     
-      setUserLoginState(data);
+      setUserLoginState(resp.data);
     } catch (error) {
       const defaultLoginFailureMessage = intl.formatMessage({
         id: 'pages.login.failure',
         defaultMessage: '登录失败，请重试！',
       });
-      console.log(error);
       message.error(defaultLoginFailureMessage);
     }
   };

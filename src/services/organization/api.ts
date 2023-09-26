@@ -18,9 +18,9 @@ export async function createORG(
 
 export async function updateORG(
     params: {
-        id: number;
-        name: string;
-        code: string;
+        id?: number;
+        name?: string;
+        code?: string;
         desc?: string;
         enabled?: boolean;
     },
@@ -51,5 +51,28 @@ export async function listORGs(
             pageIndex: params.current,
             pageSize: params.pageSize,
         },
+    });
+}
+
+export async function listORGsAndFormatResponse(
+    params: {
+        name?: string;
+        code?: string;
+        enabled?: boolean;
+        current?: number;
+        pageSize?: number;
+    },
+) {
+    return request(`/v1/organization/orgs`, {
+        method: 'GET',
+        params: {
+            name: params.name,
+            code: params.code,
+            enabled: params.enabled,
+            pageIndex: params.current,
+            pageSize: params.pageSize,
+        },
+    }).then((res)=>{
+        return res.data
     });
 }

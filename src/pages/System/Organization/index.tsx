@@ -1,10 +1,10 @@
 import { ORG } from "@/services/organization/typing";
-import { PageContainer, ProColumns, ProTable } from "@ant-design/pro-components";
+import { ProColumns, ProTable } from "@ant-design/pro-components";
 import { useState } from "react";
 import OrganizationForm from "./components/organization_form";
-import { Button, Space, Tag } from "antd";
+import { Button, Space, Tag, message } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import { listORGs } from "@/services/organization/api";
+import { listORGsAndFormatResponse, updateORG } from "@/services/organization/api";
 
 export type OrganizationProps = {}
 
@@ -73,13 +73,38 @@ const Organization: React.FC<OrganizationProps> = (props) => {
                         <Button type="primary" onClick={()=>{
                             onEdit(record)
                         }}>EDIT</Button>
-                        {record.enabled ? <Button danger type='primary'>DISABLE</Button> : <Button type='primary'>ENABLE</Button>}
+                        {record.enabled ? <Button danger type='primary' onClick={()=>{
+                            onDisable(record.code)
+                        }}>DISABLE</Button> : <Button type='primary' onClick={()=>{
+                            onEnable(record.code)
+                        }}>ENABLE</Button>}
                         <Button danger type='primary'>DELETE</Button>
                     </Space>
                 )
             }
         }
     ]
+
+    const onEnable = (code: string) => {
+        updateORG({code: code, enabled: true}).then((res)=>{
+            if (res.success) {
+                window.location.reload()
+            } else {
+                message.error(res.message)
+            }
+        })
+    }
+
+    const onDisable = (code: string) => {
+        updateORG({code: code, enabled: false}).then((res)=>{
+            if (res.success) {
+                message.info("disable success!")
+                window.location.reload()
+            } else {
+                message.error(res.message)
+            }
+        })
+    }
 
     const onEdit = (item: ORG.OrganizationItem) => {
         setEdit(true)
@@ -98,7 +123,7 @@ const Organization: React.FC<OrganizationProps> = (props) => {
             <ProTable
                     loading={loading}
                     columns={columns}
-                    request={listORGs}
+                    request={listORGsAndFormatResponse}
                     toolBarRender={() => [
                         <Button onClick={() => {
                             setAddORG(true)
