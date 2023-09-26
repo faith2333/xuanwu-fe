@@ -76,3 +76,13 @@ export async function listORGsAndFormatResponse(
         return res.data
     });
 }
+
+export async function deleteORG(
+    params: {
+        id: number
+    }
+) {
+    return request(`/v1/organization/orgs/${params.id}`,{
+        method: "DELETE"
+    })
+}

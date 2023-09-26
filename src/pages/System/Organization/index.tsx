@@ -4,7 +4,7 @@ import { useState } from "react";
 import OrganizationForm from "./components/organization_form";
 import { Button, Space, Tag, message } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import { listORGsAndFormatResponse, updateORG } from "@/services/organization/api";
+import { listORGsAndFormatResponse, updateORG, deleteORG } from "@/services/organization/api";
 
 export type OrganizationProps = {}
 
@@ -78,7 +78,9 @@ const Organization: React.FC<OrganizationProps> = (props) => {
                         }}>DISABLE</Button> : <Button type='primary' onClick={()=>{
                             onEnable(record.code)
                         }}>ENABLE</Button>}
-                        <Button danger type='primary'>DELETE</Button>
+                        <Button danger type='primary' onClick={()=>{
+                            onDeleteORG(record.id)
+                        }}>DELETE</Button>
                     </Space>
                 )
             }
@@ -86,16 +88,19 @@ const Organization: React.FC<OrganizationProps> = (props) => {
     ]
 
     const onEnable = (code: string) => {
+        setLoading(true)
         updateORG({code: code, status: "enable"}).then((res)=>{
             if (res.success) {
                 window.location.reload()
             } else {
                 message.error(res.message)
             }
+            setLoading(false)
         })
     }
 
     const onDisable = (code: string) => {
+        setLoading(true)
         updateORG({code: code, status: "disable"}).then((res)=>{
             if (res.success) {
                 message.info("disable success!")
@@ -103,6 +108,20 @@ const Organization: React.FC<OrganizationProps> = (props) => {
             } else {
                 message.error(res.message)
             }
+            setLoading(false)
+        })
+    }
+
+    const onDeleteORG = (id: number) => {
+        setLoading(true)
+        deleteORG({id: id}).then((res)=>{
+            if (res.success) {
+                message.info("delete organization success")
+                window.location.reload()
+            } else {
+                message.error("delete failed: ",res.message)
+            }
+            setLoading(false)
         })
     }
 
