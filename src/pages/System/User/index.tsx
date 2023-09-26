@@ -5,11 +5,7 @@ export type UserListProps = {}
 const UserList: React.FC<UserListProps> = (props) => {
     return (
         <div>
-            <PageContainer
-                title={false}
-            >
-               User List
-            </PageContainer>
+            User List
         </div>
     )
 }

@@ -16,11 +16,36 @@ export async function listApps(
 
     },
 ) {
-    return request('/v1/application/list', {
+    return request('/v1/application/app', {
         method: 'GET',
         params: {
             ...params,
         },
+    });
+}
+
+export async function listAppsAndFormatResponse(
+    params: {
+        id?: number;
+        code?: string;
+        name?: string;
+        appType?: string;
+        category?: string;
+        labels?: string[];
+        /** current page */
+        current?: number;
+        /** page size */
+        pageSize?: number;
+
+    },
+) {
+    return request('/v1/application/app', {
+        method: 'GET',
+        params: {
+            ...params,
+        },
+    }).then((res)=>{
+        return res.data
     });
 }
 
@@ -30,7 +55,7 @@ export async function deleteApp(
         code: string;
     },
 ) {
-    return request(`/v1/application/delete/${params.code}`, {
+    return request(`/v1/application/app/delete/${params.code}`, {
         method: 'DELETE',
     });
 }

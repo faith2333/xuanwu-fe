@@ -42,11 +42,11 @@ export default [
   },
   {
     path: '/application',
-    name: 'Application',
+    name: 'application',
     icon: 'AppstoreOutlined',
     routes: [
       {
-        name: 'Application List',
+        name: 'application-list',
         path: '/application/list',
         icon: 'UnorderedListOutlined',
         component: './Application/AppList',
@@ -55,23 +55,23 @@ export default [
   },
   {
     path: '/system',
-    name: 'System',
+    name: 'system',
     icon: 'SettingOutlined',
     routes: [
       {
-        name: 'User',
+        name: 'system-user',
         path: '/system/user',
         icon: 'UserOutlined',
         component: './System/User',
       },
       {
-        name: 'Role',
+        name: 'system-role',
         path: '/system/role',
         icon: 'UsergroupAddOutlined',
         component: './System/Role',
       },
       {
-        name: 'Organization',
+        name: 'system-origanization',
         path: '/system/org',
         icon: 'TeamOutlined',
         component: './System/Organization',

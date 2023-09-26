@@ -1,6 +1,6 @@
-import { deleteApp, listApps } from "@/services/application/app/api";
+import { deleteApp, listAppsAndFormatResponse } from "@/services/application/app/api";
 import { AndroidOutlined, AppleFilled, CodeFilled, Html5Filled, PlusOutlined } from "@ant-design/icons";
-import { PageContainer, ProColumns, ProTable } from "@ant-design/pro-components";
+import {  ProColumns, ProTable } from "@ant-design/pro-components";
 import { Button, Space, Tag, message } from "antd";
 import React from "react";
 import AddAppForm from "./components/add_application_form";
@@ -120,22 +120,18 @@ const ApplicationList: React.FC<ApplicationListProps> = (props) => {
                 visible={addVisiable}
                 setVisible={setAddVisiable}
             />
-            <PageContainer 
-                title={false}
-            >
-                <ProTable
-                    loading={loading}
-                    columns={columns}
-                    request={listApps}
-                    toolBarRender={() => [
-                        <Button key="3" type="primary" onClick={()=>{
-                            setAddVisiable(true)
-                        }}>
-                            <PlusOutlined/>ADD
-                        </Button>,
-                    ]}
-                />
-            </PageContainer>
+            <ProTable
+                loading={loading}
+                columns={columns}
+                request={listAppsAndFormatResponse}
+                toolBarRender={() => [
+                    <Button key="3" type="primary" onClick={()=>{
+                        setAddVisiable(true)
+                    }}>
+                        <PlusOutlined/>ADD
+                    </Button>,
+                ]}
+            />
         </>
     )
 }
