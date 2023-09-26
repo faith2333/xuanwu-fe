@@ -123,7 +123,7 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
                                 <Select
                                     onChange={(value) => {
                                         form.setFieldsValue({
-                                            enabled: value
+                                            status: value
                                         })
                                     }}
                                 >
