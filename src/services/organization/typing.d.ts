@@ -5,7 +5,7 @@ export namespace ORG {
         name: string;
         code: string;
         desc?: string;
-        enabled?: boolean;
+        status?: string;
         gmtCreate: string;
         gmtModify: string;
         createUser: string;

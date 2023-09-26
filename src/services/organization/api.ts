@@ -22,7 +22,7 @@ export async function updateORG(
         name?: string;
         code?: string;
         desc?: string;
-        enabled?: boolean;
+        status?: string;
     },
 ) {
     return request(`/v1/organization/orgs`, {
@@ -37,7 +37,7 @@ export async function listORGs(
     params: {
         name?: string;
         code?: string;
-        enabled?: boolean;
+        status?: string;
         current?: number;
         pageSize?: number;
     },
@@ -47,7 +47,7 @@ export async function listORGs(
         params: {
             name: params.name,
             code: params.code,
-            enabled: params.enabled,
+            status: params.status,
             pageIndex: params.current,
             pageSize: params.pageSize,
         },

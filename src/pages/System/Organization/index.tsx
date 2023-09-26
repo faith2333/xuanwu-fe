@@ -34,9 +34,9 @@ const Organization: React.FC<OrganizationProps> = (props) => {
         },
         {
             title: 'Status',
-            dataIndex: 'enabled',
+            dataIndex: 'status',
             render: (_, record) => {
-                if (record.enabled) {
+                if (record.status === 'enable') {
                     return (
                         <Tag color="green">Enabled</Tag>
                     )
@@ -73,7 +73,7 @@ const Organization: React.FC<OrganizationProps> = (props) => {
                         <Button type="primary" onClick={()=>{
                             onEdit(record)
                         }}>EDIT</Button>
-                        {record.enabled ? <Button danger type='primary' onClick={()=>{
+                        {record.status === 'enable' ? <Button danger type='primary' onClick={()=>{
                             onDisable(record.code)
                         }}>DISABLE</Button> : <Button type='primary' onClick={()=>{
                             onEnable(record.code)
@@ -86,7 +86,7 @@ const Organization: React.FC<OrganizationProps> = (props) => {
     ]
 
     const onEnable = (code: string) => {
-        updateORG({code: code, enabled: true}).then((res)=>{
+        updateORG({code: code, status: "enable"}).then((res)=>{
             if (res.success) {
                 window.location.reload()
             } else {
@@ -96,7 +96,7 @@ const Organization: React.FC<OrganizationProps> = (props) => {
     }
 
     const onDisable = (code: string) => {
-        updateORG({code: code, enabled: false}).then((res)=>{
+        updateORG({code: code, status: "disable"}).then((res)=>{
             if (res.success) {
                 message.info("disable success!")
                 window.location.reload()

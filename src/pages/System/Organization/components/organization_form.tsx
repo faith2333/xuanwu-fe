@@ -1,6 +1,7 @@
-import { createORG } from "@/services/organization/api"
+import { createORG, updateORG } from "@/services/organization/api"
 import { ORG } from "@/services/organization/typing"
 import { Button, Col, Drawer, Form, Input, Row, Select, Space, message } from "antd"
+import { Item } from "rc-menu"
 import React, { useEffect } from "react"
 
 export type OrganizationFormProps = {
@@ -21,7 +22,7 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
                 name: props.item.name,
                 code: props.item.code,
                 desc: props.item.desc,
-                enabled: props.item.enabled,
+                status: props.item.status,
             })
         } else {
             form.resetFields()
@@ -40,16 +41,33 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
         form.validateFields()
             .then(values => {
                 if (props.edit) {
-
+                    updateORG({
+                        name: values.name,
+                        code: values.code,
+                        desc: values.desc,
+                        status: values.status,
+                    }).then((res)=>{
+                        if (res.success) {
+                            message.success('Organization Update successfully')
+                            window.location.reload()
+                        } else {
+                            message.error("Update failed: ",res.message)
+                        }
+                    })
                 } else {
                     createORG({
                         name: values.name,
                         code: values.code,
                         desc: values.desc,
                         enabled: values.enabled,
-                   }).then(res => {
-                        message.success('Organization created successfully')
-                        window.location.reload()
+                   }).then((res) => {
+                        if (res.success) {
+                            message.success('Organization created successfully')
+                            window.location.reload()
+                        } else {
+                            message.error("Creae failed: ",res.message)
+                        }
+                        
                    })
                 }
             })
@@ -98,8 +116,8 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
                         </Col>
                         <Col span={4}>
                             <Form.Item
-                                name="enabled"
-                                label="enabled"
+                                name="status"
+                                label="Status"
                                 rules={[{ required: true, message: 'Please enabled or disabled organization' }]}
                             >
                                 <Select
@@ -109,8 +127,8 @@ const OrganizationForm: React.FC<OrganizationFormProps> = (props) => {
                                         })
                                     }}
                                 >
-                                    <Select.Option value={true}>Enabled</Select.Option>
-                                    <Select.Option value={false}>Disabled</Select.Option>
+                                    <Select.Option value='enable'>Enabled</Select.Option>
+                                    <Select.Option value='disable'>Disabled</Select.Option>
                                 </Select>
                             </Form.Item>
                         </Col>
