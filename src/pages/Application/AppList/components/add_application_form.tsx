@@ -1,6 +1,9 @@
+import { listORGs, listORGsAndFormatResponse } from "@/services/organization/api";
+import { ORG } from "@/services/organization/typing";
 import { AndroidFilled } from "@ant-design/icons";
 import { Button, Checkbox, Col, Drawer, Form, Input, Row, Select, Space, message } from "antd";
-import React, { useState } from "react";
+import { values } from "lodash";
+import React, { useEffect, useState } from "react";
 
 export type AddAppFormProps = {
     visible: boolean;
@@ -10,6 +13,7 @@ export type AddAppFormProps = {
 const AddAppForm: React.FC<AddAppFormProps> = (props) => {
     const [buttonLoading, setButtonLoading] = React.useState<boolean>(false)
     const [labels, setLabels] = useState<string[]>([])
+    const [categoryOptions, setCategoryOptions] = useState<ORG.OrganizationItem[]>([])
 
     const [form] = Form.useForm();
 
@@ -27,6 +31,16 @@ const AddAppForm: React.FC<AddAppFormProps> = (props) => {
     }
 
     const { Option } = Select;
+
+    useEffect(()=>{
+        listORGs({current:0,pageSize:20}).then((res)=> {
+            if (res.success) {
+                setCategoryOptions(res.data.data)
+            } else {
+                message.error("get application category failed: ",res.message)
+            }
+        })
+    },[])
 
 
     return (
@@ -74,13 +88,13 @@ const AddAppForm: React.FC<AddAppFormProps> = (props) => {
                                 <Select
                                     onChange={(value) => {
                                         form.setFieldValue('type', value)
-                                        console.log(form.getFieldsValue())
                                     }}
                                 >
                                     <Option value="ANDROID">Android</Option>
                                     <Option value="IOS">IOS</Option>
                                     <Option value="WEB">Web</Option>
                                     <Option value="BACKEND">Backend</Option>
+                                    <Option value='LLM'>LLM</Option>
                                 </Select>
                             </Form.Item>
                         </Col>
@@ -92,29 +106,23 @@ const AddAppForm: React.FC<AddAppFormProps> = (props) => {
                             >
                                 <Select
                                     onChange={(value) => {
-                                        form.setFieldValue('type', value)
-                                        console.log(form.getFieldsValue())
+                                        form.setFieldValue('category', value)
                                     }}
-                                >
-                                    <Option value="ANDROID">Android</Option>
-                                    <Option value="IOS">IOS</Option>
-                                    <Option value="WEB">Web</Option>
-                                    <Option value="BACKEND">Backend</Option>
-                                </Select>
+                                    options={categoryOptions.map((item)=>({label: item.name, value: item.code}))}
+                                />
                             </Form.Item>
                         </Col>
                         <Col span={12}>
                             <Form.Item
                                 name='labels'
                                 label="Labels"
-                                rules={[{ required: true, message: 'Please select application category' }]}
                             >
                                 <Select
                                     mode="multiple"
                                     style={{ width: '100%' }}
                                     placeholder="Select labels"
                                     onChange={(value) => {
-                                      
+                                      form.setFieldValue('labels',value)
                                     }}
                                 >
                                     {labels.map((label) => (
